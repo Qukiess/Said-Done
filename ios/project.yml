@@ -1,0 +1,23 @@
+name: SaidAndDone
+options:
+  bundleIdPrefix: com.qukiess
+  deploymentTarget:
+    iOS: "17.0"
+targets:
+  SaidAndDone:
+    type: application
+    platform: iOS
+    sources: [SaidAndDone]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.qukiess.saidanddone
+        PRODUCT_NAME: SaidAndDone
+        MARKETING_VERSION: "0.1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        SWIFT_VERSION: "5.9"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: "Said & Done"
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        TARGETED_DEVICE_FAMILY: "1"
+        CODE_SIGNING_ALLOWED: NO

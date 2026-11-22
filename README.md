@@ -4,7 +4,7 @@ A warm, private diary. Write or speak your day, keep a gentle streak with rest d
 
 ## Use it on iPhone
 
-1. Open https://qukiess.github.io/said-done/ in Safari.
+1. Open https://qukiess.github.io/Said-Done/ in Safari.
 2. Tap Share, then **Add to Home Screen**.
 3. Open Said & Done from the home screen. Write there, not in the Safari tab: iPhone keeps the two separately.
 

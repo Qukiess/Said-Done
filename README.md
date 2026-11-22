@@ -20,5 +20,5 @@ Everything is stored on the device (IndexedDB). Nothing is sent to a server.
 
 ## Project layout
 
-- `docs/`: the web app, served by GitHub Pages. No build step.
+- Repository root: the web app, served by GitHub Pages from `main` / root. No build step.
 - `ios/`: an early SwiftUI prototype for a possible native version later.

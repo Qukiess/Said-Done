@@ -1,6 +1,6 @@
 // Said & Done service worker: network first, cache as fallback, so updates
 // arrive as soon as the phone is online and the app still opens offline.
-const CACHE = 'sd-v2';
+const CACHE = 'sd-v3';
 const SHELL = [
   './',
   './index.html',
@@ -31,7 +31,7 @@ self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET' || new URL(req.url).origin !== self.location.origin) return;
   event.respondWith(
-    fetch(req)
+    fetch(req, { cache: 'no-cache' })
       .then((res) => {
         if (res.ok) {
           const copy = res.clone();

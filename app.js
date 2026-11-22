@@ -2,7 +2,7 @@
 (() => {
 'use strict';
 
-const VERSION = '0.1.0';
+const VERSION = '0.2.0';
 const REST_PER_MONTH = 2;
 const GLYPH = '<path transform="translate(22.70 92.20) scale(0.0422 -0.0422)" d="M1180.6 -42.6Q1339.4 -42.6 1454.9 28.3Q1570.4 99.2 1633.1 230.6Q1695.8 362 1695.8 543.8Q1695.8 784.4 1610 983.3Q1524.2 1182.2 1374 1322.4Q1248.2 1439.6 1084.7 1504.8Q921.2 1570 741.8 1570Q527.2 1570 379.4 1504Q231.6 1438 154.9 1315.3Q78.2 1192.6 78.2 1022.2Q78.2 927.4 115.9 868.4Q153.6 809.4 215.2 809.4Q270.6 809.4 305.3 845.9Q340 882.4 340 939.8Q340 978.8 331.2 1006.5Q322.4 1034.2 311 1057.4Q299.6 1080.6 290.8 1105.9Q282 1131.2 282 1165.8Q282 1239.8 328.4 1306.3Q374.8 1372.8 475.1 1415Q575.4 1457.2 736.6 1457.2Q892 1457.2 1035 1397.2Q1178 1337.2 1288.2 1232.6Q1424.2 1104.8 1501.5 928.4Q1578.8 752 1578.8 544.8Q1578.8 394.2 1536.3 298.4Q1493.8 202.6 1424.1 157.2Q1354.4 111.8 1272 111.8Q1210.4 111.8 1152.3 141.9Q1094.2 172 1032.8 242.8Q971.4 313.6 897 433.4Q832.8 537 792.7 628.6Q752.6 720.2 733.5 802.9Q714.4 885.6 714.4 960.4Q714.4 1057.8 749.4 1113.5Q784.4 1169.2 843.8 1169.2Q886 1169.2 913.9 1122.4Q941.8 1075.6 941.8 999.2Q941.8 917.6 916.6 856.1Q891.4 794.6 843.1 756.6Q794.8 718.6 726.2 705L739.4 616.4Q870.6 628.2 962.7 675.3Q1054.8 722.4 1103.4 798.6Q1152 874.8 1152 972.2Q1152 1059 1114.7 1125.4Q1077.4 1191.8 1011 1229.7Q944.6 1267.6 856.4 1267.6Q744.8 1267.6 664.3 1215.5Q583.8 1163.4 540.7 1074.1Q497.6 984.8 497.6 872.8Q497.6 765 521.4 664.7Q545.2 564.4 591.8 463.6Q638.4 362.8 706.4 252.4Q767.4 151.8 834.7 86.5Q902 21.2 986.4 -10.7Q1070.8 -42.6 1180.6 -42.6ZM1004 222.2 1041.4 153.6Q1220.6 251.6 1298.3 366.8Q1376 482 1376 602.6Q1376 672.6 1344.9 714.4Q1313.8 756.2 1269.8 756.2Q1221.4 756.2 1187.5 718.4Q1153.6 680.6 1153.6 628.2Q1153.6 601.4 1156.9 582.2Q1160.2 563 1163.3 543.9Q1166.4 524.8 1166.4 497Q1166.4 451.8 1149.5 406Q1132.6 360.2 1096.9 314.2Q1061.2 268.2 1004 222.2ZM568.2 596.8V692.4Q406.2 683 296.2 629.9Q186.2 576.8 129.8 491.3Q73.4 405.8 73.4 299Q73.4 138.8 171.4 54.4Q269.4 -30 446.2 -30Q528.8 -30 598.3 -13.9Q667.8 2.2 724.3 35.4Q780.8 68.6 825 119L777 190.8Q718.8 145.4 665.3 122.3Q611.8 99.2 549.8 99.2Q463 99.2 406 163.5Q349 227.8 349 327.2Q349 399.6 372.1 456.3Q395.2 513 444.1 549.6Q493 586.2 568.2 596.8Z" fill="#FFB627"></path>';
 
@@ -447,7 +447,7 @@ async function openEntry(id) {
 
 /* ---------- Goals ---------- */
 const HORIZONS = { month: 'This month', '3m': '3 months', '6m': '6 months', year: 'This year' };
-const BAR = { month: '#5B3FA8', '3m': '#D9502A', '6m': '#C98A00', year: '#3F7A5C' };
+const BAR = { month: 'var(--bar-month)', '3m': 'var(--bar-3m)', '6m': 'var(--bar-6m)', year: 'var(--bar-year)' };
 function goalEnd(g) {
   const c = new Date(g.createdAt);
   if (g.horizon === 'month') return new Date(c.getFullYear(), c.getMonth() + 1, 0);
@@ -537,6 +537,13 @@ function viewSettings() {
   <main class="screen" id="settings">
     <button class="back" data-act="back">${ICON.left}Today</button>
     <h1 class="title">Make it yours</h1>
+    <h2 class="section-label">Appearance</h2>
+    <section class="card group">
+      <div class="theme-row" style="border-bottom:0"><span id="theme-label">Theme</span>
+        <div class="seg" role="group" aria-labelledby="theme-label">${[['system', 'Auto'], ['light', 'Light'], ['dark', 'Dark']].map(([k, l]) => `<button type="button" data-act="theme" data-val="${k}" aria-pressed="${(S.kv.theme || 'system') === k}">${l}</button>`).join('')}</div>
+      </div>
+    </section>
+    <p class="fine">Auto follows your iPhone's light and dark setting.</p>
     <h2 class="section-label">Privacy</h2>
     <section class="card group">
       ${S.kv.passHash
@@ -837,6 +844,7 @@ document.addEventListener('click', async (ev) => {
     case 'remove-pass':
       if (await passcode('check')) { await setKV('passHash', null); toast('Passcode off'); render(); }
       break;
+    case 'theme': await setKV('theme', el.dataset.val); applyTheme(); render(); break;
     case 'export': await exportBackup(); break;
     case 'import': $('#import-file').click(); break;
     case 'replay-intro': await playIntro(); break;
@@ -851,7 +859,7 @@ document.addEventListener('click', async (ev) => {
 
 document.addEventListener('click', (ev) => {
   const b = ev.target.closest('.seg button');
-  if (!b || b.disabled) return;
+  if (!b || b.disabled || !b.parentElement.dataset.group) return;
   const group = b.parentElement.dataset.group;
   $$('button', b.parentElement).forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
   S.goalForm[group] = b.dataset.val;
@@ -898,6 +906,19 @@ document.addEventListener('visibilitychange', async () => {
   if (S.tab === 'today' && !$('#overlay-root').children.length) render(); // refresh greeting and date
 });
 
+/* ---------- Theme ---------- */
+const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+function applyTheme() {
+  const t = S.kv.theme || 'system';
+  try { localStorage.setItem('sd-theme', t); } catch (e) { /* ignore */ }
+  if (t === 'system') delete document.documentElement.dataset.theme;
+  else document.documentElement.dataset.theme = t;
+  const dark = t === 'dark' || (t === 'system' && darkQuery.matches);
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', dark ? '#1B1520' : '#FFF6EE');
+}
+if (darkQuery.addEventListener) darkQuery.addEventListener('change', applyTheme);
+
 /* ---------- Start ---------- */
 async function start() {
   try {
@@ -906,6 +927,7 @@ async function start() {
     $('#app').innerHTML = '<main class="screen"><h1 class="title">Something went wrong</h1><p>Said &amp; Done could not open its storage. Private browsing can block it.</p></main>';
     return;
   }
+  applyTheme();
   render();
   if (S.kv.passHash) await passcode('unlock');
   const now = new Date();

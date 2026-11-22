@@ -1,6 +1,6 @@
 // Said & Done service worker: network first, cache as fallback, so updates
 // arrive as soon as the phone is online and the app still opens offline.
-const CACHE = 'sd-v1';
+const CACHE = 'sd-v2';
 const SHELL = [
   './',
   './index.html',
